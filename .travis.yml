@@ -5,12 +5,8 @@ services:
 
 language: node_js
 
-node_js: 6
+node_js: 10
 
 after_success:
   - npm run coverage
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker build . -t robertstettner/drone-cloudformation;
-    docker push robertstettner/drone-cloudformation;
-    fi
+  - ./scripts/docker.sh
